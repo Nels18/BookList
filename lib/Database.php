@@ -5,9 +5,8 @@ require_once("_connect.php");
 class Database
 {
     private static ?Database $instance = null;
-    
     private PDO $pdo;
-
+    
     private function __construct()
     {
         $this->pdo = new PDO("mysql:host=".DATABASE_HOST.";dbname=".DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASS);
