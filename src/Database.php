@@ -1,6 +1,10 @@
 <?php
 
+namespace App;
+
 require_once("_connect.php");
+
+use PDO;
 
 class Database
 {
