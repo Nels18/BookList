@@ -1,6 +1,7 @@
 <?php
 
 use App\Autoloader;
+use App\Book;
 use App\Render\Render;
 
   require_once 'src/Autoloader.php';
@@ -21,10 +22,8 @@ use App\Render\Render;
     <main class="container-fluid p-5">
       <h1 class="display-1 text-center m-5">Booklist</h1>
       <?php
-        $table = new Render();
-        echo $table->render('book');
-        echo $table->render('author');
-        echo $table->render('category');
+        $book = new Book();
+        echo $book->readAll();
       ?>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

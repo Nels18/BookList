@@ -8,8 +8,8 @@ use PDO;
 
 class Database
 {
-    private static ?Database $instance = null;
-    private PDO $pdo;
+    public static $instance = null;
+    private $pdo;
     
     private function __construct()
     {
@@ -35,6 +35,6 @@ class Database
 
     public function listTable(string $tableName): array
     {
-        return $this->query('SELECT * FROM '.$tableName);
+        return $this->query(`SELECT * FROM ${$tableName}`);
     }
 }
