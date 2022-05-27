@@ -1,12 +1,12 @@
 <?php
 
-use App\Autoloader;
-use App\Book;
-use App\Render\Render;
+  use App\Autoloader;
+  use App\Book;
 
   require_once 'src/Autoloader.php';
   Autoloader::register();
 ?>
+
 <!DOCTYPE html>
 <html lang='fr'>
   <head>
@@ -25,6 +25,7 @@ use App\Render\Render;
         $book = new Book();
         echo $book->readAll();
       ?>
+      <a href="form_book.php"><button class="btn btn-primary">Ajouter un livre</button></a href="form_book.php">
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="asset/script/script.js"></script>
