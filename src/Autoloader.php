@@ -2,12 +2,14 @@
 
 namespace App;
 
-class Autoloader{
+class Autoloader
+{
 
     /**
      * Register autoloader
      */
-    static function register(){
+    public static function register()
+    {
         spl_autoload_register(array(__CLASS__, 'autoload'));
     }
 
@@ -15,13 +17,19 @@ class Autoloader{
      * Includes the file corresponding to the class
      * @param $class string The name of the class to load
      */
-    static function autoload($className){
+    public static function autoload($className)
+    {
         $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
-        $filename = __DIR__ . DIRECTORY_SEPARATOR . $className . '.php';
-        $filename = str_replace('App/', '', $filename);
-        
-        if (is_readable($filename)) {
-            require_once($filename);
-        }
+
+        spl_autoload_register(function ($className) {
+            $filename = __DIR__ . DIRECTORY_SEPARATOR . $className . '.php';
+            $filename = str_replace('App\\', '', $filename);
+            $filename = str_replace('\\', '/', $filename);
+
+            if (!file_exists($filename)) {
+                return false;
+            }
+            include $filename;
+        });
     }
 }
