@@ -2,9 +2,9 @@
 
 namespace App\Render;
 
-use App\Database;
+use App\Database\Database;
 
-class Render
+class RenderTable
 {
     public function render(string $tableName): string
     {

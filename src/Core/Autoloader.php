@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Core;
 
 class Autoloader
 {
@@ -22,7 +22,7 @@ class Autoloader
         $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
 
         spl_autoload_register(function ($className) {
-            $filename = __DIR__ . DIRECTORY_SEPARATOR . $className . '.php';
+            $filename = 'src' . DIRECTORY_SEPARATOR . $className . '.php';
             $filename = str_replace('App\\', '', $filename);
             $filename = str_replace('\\', '/', $filename);
 

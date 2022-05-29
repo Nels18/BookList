@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Database;
 
-require_once("_connect.php");
+require_once(__DIR__ ."/_connect.php");
 
 use PDO;
 
