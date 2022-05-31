@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Database\Database;
+use App\Chore\Database\Database;
 
 class PaginatorController
 {

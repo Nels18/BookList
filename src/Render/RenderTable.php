@@ -2,7 +2,7 @@
 
 namespace App\Render;
 
-use App\Database\Database;
+use App\Chore\Database\Database;
 
 class RenderTable
 {
