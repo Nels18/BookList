@@ -7,7 +7,7 @@ use App\Chore\Database\Database;
 class AbstractModel extends Database
 {
     // Table de la base de données
-    protected $table;
+    public $table;
 
     // Instance de Database
     private $db;
@@ -87,7 +87,7 @@ class AbstractModel extends Database
 
         // On boucle pour éclater le tableau
         foreach ($model as $column => $value) {
-            // UPDATE annonces SET titre = ?, description = ?, actif = ? WHERE id= ?
+            // UPDATE annonces SET titre = ?, author_id = ?, summary = ? WHERE id= ?
             if ($value !== null && $column != 'db' && $column != 'table') {
                 $columns[] = "$column = ?";
                 $values[] = $value;
@@ -99,7 +99,7 @@ class AbstractModel extends Database
         $list_columns = implode(', ', $columns);
 
         // On exécute la requête
-        // ('UPDATE ' . $this->table . ' SET ' . $liste_champs . ' WHERE id = ?', $valeurs)
+        // ('UPDATE ' . $this->table . ' SET ' . $list_columns . ' WHERE id = ?', $values)
         return $this->run('UPDATE ' . $this->table . ' SET ' . $list_columns . ' WHERE id = ?', $values);
     }
 
@@ -110,40 +110,29 @@ class AbstractModel extends Database
 
     public function hydrate($data)
     {
-        $entity = 'App\Entity\\' . ucfirst($this->table) . 'Entity';
-        $entityIntance = new $entity();
+
         foreach ($data as $key => $value) {
-            // On récupère le nom du setter correspondant à la clé (key)
-            $setter = 'set' . ucfirst($key);
-            preg_match_all('/(?<=_)[a-z]/', $setter, $matches, PREG_OFFSET_CAPTURE);
-
-            foreach ($matches[0] as $matche => $char) {
-                $indexCharToUpper = $char[1];
-                $charToReplace = $setter[$indexCharToUpper];
-                $setter[$indexCharToUpper] = strtoupper($charToReplace);
-            };
-            $setter = str_replace('_', '', $setter);
-
-            
+            $setter = $this->getSetter($key);
             // On vérifie si le setter existe
-            if (method_exists($entity, $setter)) {
+            if (method_exists($this, $setter)) {
                 // On appelle le setter
-                $entityIntance->$setter($value);
+                $this->$setter($value);
             }
         }
-        return $entityIntance;
+        return $this;
     }
 
-    // public function query(string $sql, array $params = []): array
-    // {
-    //     $statement = $this->pdo->prepare($sql);
-    //     $statement->execute($params);
+    public function getSetter($property)
+    {
+        // On récupère le nom du setter correspondant à la clé (key)
+        $setter = 'set' . ucfirst($property);
+        preg_match_all('/(?<=_)[a-z]/', $setter, $matches, PREG_OFFSET_CAPTURE);
 
-    //     return $statement->fetchAll(PDO::FETCH_ASSOC);
-    // }
-
-    // public function listTable(string $tableName): array
-    // {
-    //     return $this->query(`SELECT * FROM ${$tableName}`);
-    // }
+        foreach ($matches[0] as $matche => $char) {
+            $indexCharToUpper = $char[1];
+            $charToReplace = $setter[$indexCharToUpper];
+            $setter[$indexCharToUpper] = strtoupper($charToReplace);
+        };
+        return $setter = str_replace('_', '', $setter);
+    }
 }
