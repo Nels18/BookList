@@ -4,21 +4,24 @@ namespace App\Render;
 
 class Renderer
 {
-    public function render(string $view, array $parameters = null): string | false
+    public function render(string $view, array $parameters = [])
     {
+        // On extrait le contenu de $donnees
+        extract($parameters);
+                
+        // On démarre le buffer de sortie
+
+        // A partir de ce point toute sortie est conservée en mémoire
         ob_start();
-        require_once $view;
+
+        
+        // On crée le chemin vers la vue
+        require_once ROOT . DIRECTORY_SEPARATOR . 'src/View' . DIRECTORY_SEPARATOR . $view . '.php';
+        
+        // Transfère le buffer dans $contenu
         $content = ob_get_clean();
         
-        if (!$content) {
-            return $this->noResults();
-        }
-
-        return ($content);
-    }
-
-    public function noResults(): string
-    {
-        return '<p>Aucun résultat trouvé</p>';
+        // Template de page
+        require_once ROOT . DIRECTORY_SEPARATOR . 'src/View/base.php';
     }
 }

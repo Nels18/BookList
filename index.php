@@ -1,17 +1,26 @@
 <?php
 // On définit une constante contenant le dossier des vues
-define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+define('ROOT', __DIR__);
 
 // On importe les namespaces nécessaires
 use App\Autoloader;
 use App\Chore\Main;
 use App\Chore\Router;
-use App\Entity\BookEntity;
 use App\Model\BookModel;
 
 // On importe l'Autoloader
-require_once '../Autoloader.php';
+require_once 'Autoloader.php';
 Autoloader::register();
+
+
+  if (array_key_exists ('ENV_HTACCESS_READING', $_SERVER))
+  {
+    echo "Yes ! .htaccess is read and used !!\n";
+  }
+  else
+  {
+    echo "BAD : The .htaccess is not read : add 'AllowOverride All' in your Apache configuration\n";
+  }
 
 $bookModel = new BookModel();
 $books = $bookModel->findAll();
