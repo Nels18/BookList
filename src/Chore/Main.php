@@ -12,8 +12,5 @@ class Main
     public function start()
     {
         $this->router->formatUri();
-        echo "Main";
-
-        // echo $this->router->resolve($this->request['uri'], $this->request['method']);
     }
 }
