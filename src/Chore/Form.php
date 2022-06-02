@@ -17,17 +17,16 @@ class Form
     
     /**
      * Valide les champs du formulaire
-     *
      * @param  mixed $form
      * @param  mixed $fields
-     * @return void
+     * @return bool | array
      */
-    public static function validate(array $form, array $fields)
+    public static function validate(array $form, array $fields): bool | array
     {
         $messages = [];
 
         // On parcourt les champs
-        
+
         foreach ($fields as $field => $constraints) {
 
             // On parcourt les contraintes
@@ -42,7 +41,11 @@ class Form
             }
         }
 
-        var_dump($messages);
+        if (!empty($messages)) {
+            return $messages;
+        }
+
+        return true;
     }
 
     /**
