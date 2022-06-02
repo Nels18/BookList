@@ -13,8 +13,7 @@ class Form
     {
         return $this->formCode;
     }
-    
-    
+
     /**
      * Valide les champs du formulaire
      * @param  mixed $form
@@ -33,7 +32,7 @@ class Form
             foreach ($constraints as $constraint) {
                 // On test la donnée
                 $message = Validator::$constraint($field, $form[$field]);
-    
+
                 // On regroupe les messages si il y en a
                 if ($message) {
                     $messages[] = $message;
@@ -164,7 +163,7 @@ class Form
         $this->formCode .= "<input type='$type' name='$name'";
 
         // On ajoute les attributs
-        $this->formCode .= $attributes ? $this->addAttributs($attributes).'>' : '>';
+        $this->formCode .= $attributes ? $this->addAttributs($attributes) . '>' : '>';
 
         return $this;
     }
