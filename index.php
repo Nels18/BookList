@@ -12,16 +12,6 @@ use App\Model\BookModel;
 require_once 'Autoloader.php';
 Autoloader::register();
 
-
-  if (array_key_exists ('ENV_HTACCESS_READING', $_SERVER))
-  {
-    echo "Yes ! .htaccess is read and used !!\n";
-  }
-  else
-  {
-    echo "BAD : The .htaccess is not read : add 'AllowOverride All' in your Apache configuration\n";
-  }
-
 $bookModel = new BookModel();
 $books = $bookModel->findAll();
 $data = [
