@@ -27,13 +27,13 @@ $books = $bookModel->findAll();
 $data = [
     'author_id' => 1,
     'category_id' => 2,
-    'title' => 'modifié Hpi',
+    'title' => 'modifié Hope',
     'published_at' => '2010-11-12',
 ];
 $bookAdd = $bookModel->hydrate($data);
-// $bookModel->create($bookAdd);
-// $bookModel->update(6, $bookAdd);
-$bookModel->delete(10);
+$bookModel->create();
+// $bookModel->update(13);
+// $bookModel->delete(10);
 // var_dump($books);
 // var_dump($bookAdd);
 

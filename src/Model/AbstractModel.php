@@ -56,14 +56,14 @@ class AbstractModel extends Database
         return $this->run('SELECT * FROM ' . $this->table . ' WHERE id = ' . $id)->fetch();
     }
 
-    public function create($model)
+    public function create()
     {
         $columns = [];
         $inter = [];
         $values = [];
 
         // On boucle pour éclater le tableau
-        foreach ($model as $column => $value) {
+        foreach ($this as $column => $value) {
             // INSERT INTO annonces (titre, description, actif) VALUES (?, ?, ?)
             if ($value !== null && $column != 'db' && $column != 'table') {
                 $columns[] = $column;
@@ -80,13 +80,13 @@ class AbstractModel extends Database
         return $this->run('INSERT INTO ' . $this->table . ' (' . $list_columns . ')VALUES(' . $list_inter . ')', $values);
     }
 
-    public function update(int $id, $model)
+    public function update($id)
     {
         $columns = [];
         $values = [];
 
         // On boucle pour éclater le tableau
-        foreach ($model as $column => $value) {
+        foreach ($this as $column => $value) {
             // UPDATE annonces SET titre = ?, author_id = ?, summary = ? WHERE id= ?
             if ($value !== null && $column != 'db' && $column != 'table') {
                 $columns[] = "$column = ?";
