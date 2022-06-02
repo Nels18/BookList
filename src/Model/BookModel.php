@@ -10,6 +10,9 @@ class BookModel extends AbstractModel
     protected $title;
     protected $published_at;
     protected $summary;
+    protected $created_at;
+    protected $updated_at;
+    protected $deleted_at;
 
     public function __construct()
     {
@@ -120,6 +123,66 @@ class BookModel extends AbstractModel
     public function setSummary(string $summary): self
     {
         $this->summary = $summary;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of created_at
+     */
+    public function getCreatedAt(): string
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set the value of created_at
+     *
+     * @return  self
+     */
+    public function setCreatedAt(string $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of updated_at
+     */
+    public function getUpdatedAt(): string
+    {
+        return $this->updated_at;
+    }
+
+    /**
+     * Set the value of updated_at
+     *
+     * @return  self
+     */
+    public function setUpdatedAt(string $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of deleted_at
+     */
+    public function getDeletedAt(): string
+    {
+        return $this->deleted_at;
+    }
+
+    /**
+     * Set the value of deleted_at
+     *
+     * @return  self
+     */
+    public function setDeletedAt(string $deleted_at): self
+    {
+        $this->deleted_at = $deleted_at;
 
         return $this;
     }
