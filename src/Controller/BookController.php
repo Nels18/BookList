@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\AbstractController;
 use App\Chore\Form;
 use App\Model\BookModel;
+use App\Model\CategoryModel;
 
 class BookController extends AbstractController
 {
@@ -43,6 +44,17 @@ class BookController extends AbstractController
 
     public function add()
     {
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel->findAll();
+        $categoryNames = [];
+        foreach ($categories as $category) {
+            foreach ($category as $property => $categoryName) {
+                if ($property === 'name') {
+                    $categoryNames[$categoryName] = $categoryName;
+                }
+            }
+        }
+
         $form = new Form();
         $form->startForm()
         ->startDiv('col-md mb-3')
@@ -69,11 +81,7 @@ class BookController extends AbstractController
         ->endDiv()
         ->startDiv('col-md mb-3')
         ->addLabelFor('category', 'Genre', ['class' => 'mb-3 form-label'])
-        ->addSelect('category', [
-            'thriller' => 'Thriller',
-            'romantic' => 'Romantique',
-            'fantasy' => 'Fantastique'
-        ],
+        ->addSelect('category', $categoryNames,
         [
             'class' => 'form-control',
             'id' => 'author',
