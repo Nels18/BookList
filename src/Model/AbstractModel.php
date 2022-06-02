@@ -40,7 +40,7 @@ class AbstractModel extends Database
         foreach ($criteria as $column => $value) {
             // SELECT * FROM annonces WHERE actif = ? AND signale = 0
             // bindValue(1, value)
-            $columns[] = "$column = ?";
+            $columns[] = $this->formatPropertyForDB($column) . " = ?";
             $values[] = $value;
         }
 
@@ -66,7 +66,7 @@ class AbstractModel extends Database
         foreach ($this as $column => $value) {
             // INSERT INTO annonces (titre, description, actif) VALUES (?, ?, ?)
             if ($value !== null && $column != 'db' && $column != 'table') {
-                $columns[] = $column;
+                $columns[] = $this->formatPropertyForDB($column);
                 $inter[] = "?";
                 $values[] = $value;
             }
@@ -89,7 +89,7 @@ class AbstractModel extends Database
         foreach ($this as $column => $value) {
             // UPDATE annonces SET titre = ?, author_id = ?, summary = ? WHERE id= ?
             if ($value !== null && $column != 'db' && $column != 'table') {
-                $columns[] = "$column = ?";
+                $columns[] = $this->formatPropertyForDB($column) . " = ?";
                 $values[] = $value;
             }
         }
@@ -128,11 +128,28 @@ class AbstractModel extends Database
         $setter = 'set' . ucfirst($property);
         preg_match_all('/(?<=_)[a-z]/', $setter, $matches, PREG_OFFSET_CAPTURE);
 
-        foreach ($matches[0] as $matche => $char) {
+        foreach ($matches[0] as $char) {
             $indexCharToUpper = $char[1];
             $charToReplace = $setter[$indexCharToUpper];
             $setter[$indexCharToUpper] = strtoupper($charToReplace);
         };
         return $setter = str_replace('_', '', $setter);
+    }
+
+    public function formatPropertyForDB($property)
+    {
+        $newStrings = [];
+        // On sépare la propriété au niveau des majuscules
+        $strings = preg_split('/(?=[A-Z])/', $property);
+
+        // On stocke chaque mots avec la majuscule transformée en minuscule
+        foreach ($strings as $string) {
+            $newStrings[] = lcfirst($string);
+        };
+
+        // On rassemble tous les mots en un seul séparer un '_'
+        $property = implode('_', $newStrings);
+
+        return $property;
     }
 }
