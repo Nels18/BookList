@@ -5,14 +5,14 @@ namespace App\Model;
 class BookModel extends AbstractModel
 {
     protected $id;
-    protected $author_id;
-    protected $category_id;
+    protected $authorId;
+    protected $categoryId;
     protected $title;
-    protected $published_at;
+    protected $publishedAt;
     protected $summary;
-    protected $created_at;
-    protected $updated_at;
-    protected $deleted_at;
+    protected $createdAt;
+    protected $updatedAt;
+    protected $deletedAt;
 
     public function __construct()
     {
@@ -28,41 +28,41 @@ class BookModel extends AbstractModel
     }
 
     /**
-     * Get the value of author_id
+     * Get the value of authorId
      */
     public function getAuthorId(): int
     {
-        return $this->author_id;
+        return $this->authorId;
     }
 
     /**
-     * Set the value of author_id
+     * Set the value of authorId
      *
      * @return  self
      */
-    public function setAuthorId(int $author_id): self
+    public function setAuthorId(int $authorId): self
     {
-        $this->author_id = $author_id;
+        $this->authorId = $authorId;
 
         return $this;
     }
 
     /**
-     * Get the value of category_id
+     * Get the value of categoryId
      */
     public function getCategoryId(): int
     {
-        return $this->category_id;
+        return $this->categoryId;
     }
 
     /**
-     * Set the value of category_id
+     * Set the value of categoryId
      *
      * @return  self
      */
-    public function setCategoryId(int $category_id): self
+    public function setCategoryId(int $categoryId): self
     {
-        $this->category_id = $category_id;
+        $this->categoryId = $categoryId;
 
         return $this;
     }
@@ -88,21 +88,21 @@ class BookModel extends AbstractModel
     }
 
     /**
-     * Get the value of published_at
+     * Get the value of publishedAt
      */
     public function getPublishedAt(): string
     {
-        return $this->published_at;
+        return $this->publishedAt;
     }
 
     /**
-     * Set the value of published_at
+     * Set the value of publishedAt
      *
      * @return  self
      */
-    public function setPublishedAt(string $published_at): self
+    public function setPublishedAt(string $publishedAt): self
     {
-        $this->published_at = $published_at;
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }
@@ -120,7 +120,7 @@ class BookModel extends AbstractModel
      *
      * @return  self
      */
-    public function setSummary(string $summary): self
+    public function setSummary(?string $summary): self
     {
         $this->summary = $summary;
 
@@ -128,61 +128,61 @@ class BookModel extends AbstractModel
     }
 
     /**
-     * Get the value of created_at
+     * Get the value of createdAt
      */
     public function getCreatedAt(): string
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set the value of created_at
+     * Set the value of createdAt
      *
      * @return  self
      */
-    public function setCreatedAt(string $created_at): self
+    public function setCreatedAt(string $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get the value of updated_at
+     * Get the value of updatedAt
      */
     public function getUpdatedAt(): string
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * Set the value of updated_at
+     * Set the value of updatedAt
      *
      * @return  self
      */
-    public function setUpdatedAt(string $updated_at): self
+    public function setUpdatedAt(?string $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get the value of deleted_at
+     * Get the value of deletedAt
      */
     public function getDeletedAt(): string
     {
-        return $this->deleted_at;
+        return $this->deletedAt;
     }
 
     /**
-     * Set the value of deleted_at
+     * Set the value of deletedAt
      *
      * @return  self
      */
-    public function setDeletedAt(string $deleted_at): self
+    public function setDeletedAt(?string $deletedAt): self
     {
-        $this->deleted_at = $deleted_at;
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }

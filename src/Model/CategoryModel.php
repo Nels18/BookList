@@ -6,9 +6,9 @@ class CategoryModel extends AbstractModel
 {
     protected $id;
     protected $name;
-    protected $created_at;
-    protected $updated_at;
-    protected $deleted_at;
+    protected $createdAt;
+    protected $updatedAt;
+    protected $deletedAt;
     
     public function __construct()
     {
@@ -44,61 +44,61 @@ class CategoryModel extends AbstractModel
     }
 
     /**
-     * Get the value of created_at
+     * Get the value of createdAt
      */
     public function getCreatedAt(): string
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
-     * Set the value of created_at
+     * Set the value of createdAt
      *
      * @return  self
      */
-    public function setCreatedAt(string $created_at): self
+    public function setCreatedAt(string $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get the value of updated_at
+     * Get the value of updatedAt
      */
     public function getUpdatedAt(): string
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
     /**
-     * Set the value of updated_at
+     * Set the value of updatedAt
      *
      * @return  self
      */
-    public function setUpdatedAt(string $updated_at): self
+    public function setUpdatedAt(string $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
     /**
-     * Get the value of deleted_at
+     * Get the value of deletedAt
      */
     public function getDeletedAt(): string
     {
-        return $this->deleted_at;
+        return $this->deletedAt;
     }
 
     /**
-     * Set the value of deleted_at
+     * Set the value of deletedAt
      *
      * @return  self
      */
-    public function setDeletedAt(string $deleted_at): self
+    public function setDeletedAt(string $deletedAt): self
     {
-        $this->deleted_at = $deleted_at;
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
