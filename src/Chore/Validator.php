@@ -7,18 +7,17 @@ class Validator
 
     public static function required(string $field, string $data)
     {
-        $message = 'Le champ ' . $field . ' est requis.';
+        $message = 'Le champ "' . $field . '" est requis.';
         if ($data === '') {
             return $message;
         }
         
-        echo $data . ' : valide, required';
         return false;
     }
 
     public static function noSpecialCharacters(string $field, string $data)
     {
-        $message = 'Le champ ' . $field . ' ne doit pas contenir de caractères spéciaux ou de chiffres.';
+        $message = 'Le champ "' . $field . '" ne doit pas contenir de caractères spéciaux ou de chiffres.';
 
         if ($data === '') return;
 
@@ -26,8 +25,6 @@ class Validator
             return $message;
         }
         
-        var_dump($data);
-        echo $data . ' : valide, noSpecialCharacters';
         return false;
     }
 }
