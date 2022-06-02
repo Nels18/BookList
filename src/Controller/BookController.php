@@ -77,6 +77,10 @@ class BookController extends AbstractController
 
                 $book = $this->bookModel->hydrate($data);
                 $book->create();
+
+                $_SESSION['message'] = 'Le livre a bien été enregistré';
+                header('Location: /');
+                exit;
             }
         }
 

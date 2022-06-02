@@ -13,7 +13,12 @@
         <div class="container-fluid p-5">
             <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
             <main class="container-fluid p-5">
-            <?= $content ?>
+                <?php if (!empty($_SESSION['message'])): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $_SESSION['message'];unset($_SESSION['message']);?>
+                </div>
+                <?php endif;?>
+                <?=$content?>
             </main>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
