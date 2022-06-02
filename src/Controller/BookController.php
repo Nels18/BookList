@@ -46,13 +46,9 @@ class BookController extends AbstractController
     {
         $categoryModel = new CategoryModel();
         $categories = $categoryModel->findAll();
-        $categoryNames = [];
+        $categoriesForSelect = [];
         foreach ($categories as $category) {
-            foreach ($category as $property => $categoryName) {
-                if ($property === 'name') {
-                    $categoryNames[$categoryName] = $categoryName;
-                }
-            }
+            $categoriesForSelect[$category->id] = $category->name;
         }
 
         $form = new Form();
@@ -81,7 +77,7 @@ class BookController extends AbstractController
         ->endDiv()
         ->startDiv('col-md mb-3')
         ->addLabelFor('category', 'Genre', ['class' => 'mb-3 form-label'])
-        ->addSelect('category', $categoryNames,
+        ->addSelect('category', $categoriesForSelect,
         [
             'class' => 'form-control',
             'id' => 'author',
