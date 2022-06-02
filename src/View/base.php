@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="container-fluid p-5">
-            <h1 class="display-1 text-center m-5">Booklist</h1>
+            <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
             <main class="container-fluid p-5">
             <?= $content ?>
             </main>
