@@ -13,26 +13,37 @@ class Form
     {
         return $this->formCode;
     }
-
+    
+    
     /**
-     * Valide si tous les champs proposés sont remplis
-     * @param array $form Tableau issu du formulaire ($_POST, $_GET)
-     * @param array $field Tableau listant les champs obligatoires
-     * @return bool 
+     * Valide les champs du formulaire
+     *
+     * @param  mixed $form
+     * @param  mixed $fields
+     * @return void
      */
-    public static function validate(array $form, array $field)
+    public static function validate(array $form, array $fields)
     {
+        $messages = [];
+
         // On parcourt les champs
-        foreach($field as $champ){
-            // Si le champ est absent ou vide dans le formulaire
-            if(!isset($form[$champ]) || empty($form[$champ])){
-                // On sort en retournant false
-                return false;
+        
+        foreach ($fields as $field => $constraints) {
+
+            // On parcourt les contraintes
+            foreach ($constraints as $constraint) {
+                // On test la donnée
+                $message = Validator::$constraint($field, $form[$field]);
+    
+                // On regroupe les messages si il y en a
+                if ($message) {
+                    $messages[] = $message;
+                }
             }
         }
-        return true;
-    }
 
+        var_dump($messages);
+    }
 
     /**
      * Ajoute les attributs envoyés à la balise
@@ -42,23 +53,23 @@ class Form
     private function addAttributs(array $attributes): string
     {
         // On initialise une chaîne de caractères
-        $str = '';
+        $string = '';
 
-        // On liste les attributs "courts"
+        // On liste les attributs "courts", qui n'ont pas besoin de valeur
         $shortAttributes = ['checked', 'disabled', 'readonly', 'multiple', 'required', 'autofocus', 'novalidate', 'formnovalidate'];
 
         // On boucle sur le tableau d'attributs
         foreach($attributes as $attribut => $value){
             // Si l'attribut est dans la liste des attributs courts
             if(in_array($attribut, $shortAttributes) && $value == true){
-                $str .= " $attribut";
+                $string .= " $attribut";
             }else{
                 // On ajoute attribut='valeur'
-                $str .= " $attribut=\"$value\"";
+                $string .= " $attribut=\"$value\"";
             }
         }
 
-        return $str;
+        return $string;
     }
 
     /**
@@ -194,7 +205,7 @@ class Form
 
         // On ajoute les options
         if ($placeholder) {
-            $this->formCode .= "<option>$placeholder</option>";
+            $this->formCode .= "<option value=''>$placeholder</option>";
         }
 
         foreach($options as $value => $text){

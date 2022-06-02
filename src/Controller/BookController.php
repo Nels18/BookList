@@ -44,6 +44,15 @@ class BookController extends AbstractController
 
     public function add()
     {
+        if (!empty($_POST)) {
+            Form::validate($_POST, [
+                'author' => ['required','noSpecialCharacters'],
+                'book-title' => ['required'],
+            ]);
+            // Form::validate($_POST, 'book-title', ['required']);
+        }
+
+
         $categoryModel = new CategoryModel();
         $categories = $categoryModel->findAll();
         $categoriesForSelect = [];
@@ -95,9 +104,8 @@ class BookController extends AbstractController
         ->endDiv()
         ->startDiv('d-md-flex justify-content-between flex-column flex-md-row')
         ->startDiv('my-3')
-        ->addInput('submit', 'submit', [
+        ->addButton('Ajouter le livre', [
             'class' => 'btn btn-primary w-100',
-            'value' => 'Ajouter le livre',
         ])
         ->endDiv()
         ->startDiv('my-3')
