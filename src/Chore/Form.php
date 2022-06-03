@@ -20,25 +20,27 @@ class Form
      * @param  mixed $fields
      * @return bool | array
      */
-    public static function validate(array $form, array $fields): bool | array
+    public static function validate(array $form, mixed $params): bool | array
     {
         $messages = [];
 
         // On parcourt les champs
-
-        foreach ($fields as $field => $constraints) {
+        foreach ($params as $field => $value) {
+            $name = $value[0];
+            $constraints = $value[1];
 
             // On parcourt les contraintes
             foreach ($constraints as $constraint) {
                 // On test la donnée
-                $message = Validator::$constraint($field, $form[$field]);
+                $message = Validator::$constraint($name, $form[$field]);
 
                 // On regroupe les messages si il y en a
                 if ($message) {
                     $messages[] = $message;
                 }
             }
-        }
+        };
+
 
         if (!empty($messages)) {
             return $messages;
@@ -197,7 +199,7 @@ class Form
      * @param array $attributes 
      * @return Form
      */
-    public function addSelect(string $name, array $options, array $attributes = [], string | null $placeholder = null):self
+    public function addSelect(string $name, array $options, array $attributes = [], string $placeholder = null, string | int $reference = null):self
     {
         // On crée le select
         $this->formCode .= "<select name='$name'";
@@ -211,7 +213,9 @@ class Form
         }
 
         foreach($options as $value => $text){
-            $this->formCode .= "<option value=\"$value\">$text</option>";
+            $this->formCode .= "<option value=\"$value\"";
+            $this->formCode .=  ($reference && $value == $reference) ? ' selected' : '';
+            $this->formCode .= ">$text</option>";
         }
 
         // On ferme le select

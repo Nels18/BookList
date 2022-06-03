@@ -80,7 +80,7 @@ class AbstractModel extends Database
         return $this->run('INSERT INTO ' . $this->table . ' (' . $list_columns . ')VALUES(' . $list_inter . ')', $values);
     }
 
-    public function update($id)
+    public function update()
     {
         $columns = [];
         $values = [];
@@ -93,7 +93,8 @@ class AbstractModel extends Database
                 $values[] = $value;
             }
         }
-        $values[] = $id;
+        // On ajoute la valeur de l'id pour le 'WHERE'
+        $values[] = $this->id;
 
         // On transforme le tableau "columns" en une chaine de caractères
         $list_columns = implode(', ', $columns);
@@ -112,11 +113,13 @@ class AbstractModel extends Database
     {
 
         foreach ($data as $key => $value) {
-            $setter = $this->getSetter($key);
-            // On vérifie si le setter existe
-            if (method_exists($this, $setter)) {
-                // On appelle le setter
-                $this->$setter($value);
+            if (!is_null($value)) {
+                $setter = $this->getSetter($key);
+                // On vérifie si le setter existe
+                if (method_exists($this, $setter)) {
+                    // On appelle le setter
+                    $this->$setter($value);
+                }
             }
         }
         return $this;

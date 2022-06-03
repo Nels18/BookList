@@ -10,14 +10,29 @@
         <title>BookList</title>
     </head>
     <body>
-        <div class="container-fluid p-5">
+        <div class="container-fluid p-md-5 p-3  min-vh-100 text-dark bg-light">
             <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
-            <main class="container-fluid p-5">
-                <?php if (!empty($_SESSION['message'])): ?>
-                <div class="alert alert-success" role="alert">
-                    <?php echo $_SESSION['message'];unset($_SESSION['message']);?>
-                </div>
+            <main class="container-fluid">
+                <?php if (!empty($_SESSION['messages'])): ?>
+                    <?php foreach ($_SESSION['messages'] as $message): ?>
+                    <div class="alert alert-success" role="alert">
+                        <?php echo $message; ?>
+                    </div>
+                    <?php endforeach;?>
+                    <?php unset($_SESSION['messages']);?>
                 <?php endif;?>
+
+                <?php if (!empty($_SESSION['errors'])): ?>
+                    <div class="card p-5 my-3">
+                        <?php foreach ($_SESSION['errors'] as $error): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $error; ?>
+                        </div>
+                        <?php endforeach;?>
+                        <?php unset($_SESSION['errors']);?>
+                    </div>
+                <?php endif;?>
+
                 <?=$content?>
             </main>
         </div>

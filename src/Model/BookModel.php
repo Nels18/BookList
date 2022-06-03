@@ -26,6 +26,18 @@ class BookModel extends AbstractModel
     {
         return $this->id;
     }
+    
+        /**
+         * Set the value of authorId
+         *
+         * @return  self
+         */
+        public function setId(int $id): self
+        {
+            $this->id = $id;
+    
+            return $this;
+        }
 
     /**
      * Get the value of authorId
