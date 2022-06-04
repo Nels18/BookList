@@ -121,7 +121,7 @@ class UserController extends AbstractController
                 'class' => 'form-control',
                 'id' => 'user-email',
             ]
-                 + (isset($_POST['user-email']) ? ['value' => $_POST['user-email']] : [])
+                + (isset($_POST['user-email']) ? ['value' => $_POST['user-email']] : [])
             )
             ->endDiv()
             ->startDiv('col-md mb-3')
@@ -133,7 +133,7 @@ class UserController extends AbstractController
                 'class' => 'form-control',
                 'id' => 'user-password',
             ]
-                 + (isset($_POST['user-password']) ? ['value' => $_POST['user-password']] : [])
+                + (isset($_POST['user-password']) ? ['value' => $_POST['user-password']] : [])
             )
             ->endDiv()
             ->startDiv('col-md-4 my-4')
