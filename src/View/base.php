@@ -11,9 +11,9 @@
     </head>
     <body class="text-dark bg-light">
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary  px-md-5 px-3">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
                 <div class="container-xxl">
-                    <a href="/" class="navbar-brand">Accueil</a>
+                    <a href="/" class="navbar-brand px-md-5 px-3">Accueil</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                     </button>
@@ -27,9 +27,9 @@
                 </div>
             </nav>
         </header>
-        <div class="container-xxl px-md-5 px-3  min-vh-100">
-        <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
-            <main class="container-fluid">
+        <main class="container-xxl px-md-5 px-3 pt-5 min-vh-100">
+            <div class="container-xxl px-md-5 px-3 min-vh-100">
+                <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
                 <?php if (!empty($_SESSION['messages'])): ?>
                     <?php foreach ($_SESSION['messages'] as $message): ?>
                     <div class="alert alert-success" role="alert">
@@ -51,8 +51,8 @@
                 <?php endif;?>
 
                 <?=$content?>
-            </main>
-        </div>
+            </div>
+        </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <script src="asset/script/script.js"></script>
     </body>
