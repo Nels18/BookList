@@ -25,12 +25,12 @@
                                 </li>
                             </a>
                         </ul>
-                        <?php if (!$_SESSION['user']): ?>
+                        <?php if (!isset($_SESSION['user'])): ?>
                             <a href="/?p=user/login" class="ms-md-auto"><button class="btn btn-success me-2" type="button">Se connecter</button>
                             </a>
                         <?php endif;?>
                         <?php if (!empty($_SESSION['user'])): ?>
-                            <a href="/?p=user/login" class="ms-md-auto"><button class="btn btn-danger me-2" type="button">Se déconnecter</button>
+                            <a href="/?p=user/logout" class="ms-md-auto"><button class="btn btn-danger me-2" type="button">Se déconnecter</button>
                             </a>
                         <?php endif;?>
                     </div>

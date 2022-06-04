@@ -46,7 +46,6 @@ class UserController extends AbstractController
                 // On va chercher dans la base de données l'utilisateur avec l'email entré
                 $userFromDB = $this->userModel->findOneByEmail(strip_tags($_POST['user-email']));
 
-                
                 // Si l'utilisateur n'existe pas
                 if (!$userFromDB) {
                     // On envoie un message de session
@@ -119,34 +118,47 @@ class UserController extends AbstractController
             ->startDiv('col-md mb-3')
             ->addLabelFor('user-email', 'E-mail :', ['class' => 'mb-3 form-label'])
             ->addInput('email', 'user-email', [
-                    'class' => 'form-control',
-                    'id' => 'user-email',
-                ]
-                + (isset($_POST['user-email']) ? ['value'  => $_POST['user-email']] : [])
+                'class' => 'form-control',
+                'id' => 'user-email',
+            ]
+                 + (isset($_POST['user-email']) ? ['value' => $_POST['user-email']] : [])
             )
             ->endDiv()
             ->startDiv('col-md mb-3')
             ->addLabelFor('user-password', 'Mot de passe :', [
                 'class' => 'mb-3 form-label',
-                ]
+            ]
             )
             ->addInput('password', 'user-password', [
-                    'class' => 'form-control',
-                    'id' => 'user-password',
-                ]
-                + (isset($_POST['user-password']) ? ['value'  => $_POST['user-password']] : [])
+                'class' => 'form-control',
+                'id' => 'user-password',
+            ]
+                 + (isset($_POST['user-password']) ? ['value' => $_POST['user-password']] : [])
             )
             ->endDiv()
             ->startDiv('col-md-4 my-4')
             ->addButton('Me connecter', [
                 'class' => 'btn btn-primary w-100',
-                ]
+            ]
             )
             ->endDiv()
             ->endForm();
 
         $this->render('user/login', ['loginForm' => $form->create()]);
 
+    }
+
+    /**
+     * Déconnexion de l'utilisateur
+     * @return exit
+     */
+    public function logout()
+    {
+        // On suprime l'utilisateur de la session
+        unset($_SESSION['user']);
+        // On redirige vers la page actuelle
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
     }
 
     public function cleanDataFromUser(array $dataFromUser)
