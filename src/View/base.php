@@ -25,8 +25,14 @@
                                 </li>
                             </a>
                         </ul>
-                        <a href="/?p=user/login" class="ms-md-auto"><button class="btn btn-success me-2" type="button">Se connecter</button>
-                        </a>
+                        <?php if (!$_SESSION['user']): ?>
+                            <a href="/?p=user/login" class="ms-md-auto"><button class="btn btn-success me-2" type="button">Se connecter</button>
+                            </a>
+                        <?php endif;?>
+                        <?php if (!empty($_SESSION['user'])): ?>
+                            <a href="/?p=user/login" class="ms-md-auto"><button class="btn btn-danger me-2" type="button">Se déconnecter</button>
+                            </a>
+                        <?php endif;?>
                     </div>
                 </div>
             </nav>
@@ -43,11 +49,13 @@
                     <?php unset($_SESSION['messages']);?>
                 <?php endif;?>
 
+                <?php var_dump($_SESSION); ?>
+
                 <?php if (!empty($_SESSION['errors'])): ?>
                     <div class="card p-5 my-3">
                         <?php foreach ($_SESSION['errors'] as $error): ?>
                         <div class="alert alert-danger" role="alert">
-                            <?php echo $error; ?>
+                            <?php echo ($error); ?>
                         </div>
                         <?php endforeach;?>
                         <?php unset($_SESSION['errors']);?>
