@@ -9,9 +9,26 @@
         <link rel='stylesheet' href='asset/style/style.css'>
         <title>BookList</title>
     </head>
-    <body>
-        <div class="container-fluid p-md-5 p-3  min-vh-100 text-dark bg-light">
-            <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
+    <body class="text-dark bg-light">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary  px-md-5 px-3">
+                <div class="container-xxl">
+                    <a href="/" class="navbar-brand">Accueil</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/?p=book/index">Livres</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container-xxl px-md-5 px-3  min-vh-100">
+        <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
             <main class="container-fluid">
                 <?php if (!empty($_SESSION['messages'])): ?>
                     <?php foreach ($_SESSION['messages'] as $message): ?>
