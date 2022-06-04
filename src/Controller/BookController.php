@@ -12,15 +12,34 @@ use DateTime;
 class BookController extends AbstractController
 {
     public $bookModel;
+    public $categoryModel;
+    public $authorModel;
+
 
     public function __construct()
     {
         $this->bookModel = new BookModel();
+        $this->categoryModel = new CategoryModel();
+        $this->authorModel = new AuthorModel();
     }
 
     public function index()
     {
-        $books = $this->bookModel->findAll();
+        $booksModels = $this->bookModel->findAll();
+        
+        $books = [];
+        
+        foreach ($booksModels as $book) {
+            $books[] = [
+                'id' => $book['id'],
+                'title' => $book['title'],
+                'category' => $this->categoryModel->findOne($book['category_id']),
+                'author' => $this->authorModel->findOne($book['author_id']),
+                'published_at' => $book['published_at'] ,
+                'summary' => $book['summary'] ,
+            ];
+        };
+
         // $paginator = new PaginatorController('book');
         // $books = $this->bookModel->getBooks($paginator);
         // $pagination = $paginator->render();
@@ -42,12 +61,10 @@ class BookController extends AbstractController
 
 
         // On va chercher la catégory correspondante
-        $categoryModel = new CategoryModel();
-        $category = $categoryModel->findOne($book['category_id']);
+        $category = $this->categoryModel->findOne($book['category_id']);
         
         // On va chercher l'auteur correspondant
-        $authorModel = new AuthorModel();
-        $author = $authorModel->findOne($book['author_id']);
+        $author = $this->authorModel->findOne($book['author_id']);
 
         // On envoie à la vue
         $this->render('book/show', compact('book', 'category', 'author'));
@@ -155,15 +172,13 @@ class BookController extends AbstractController
 
     public function getBookForm(mixed $book = null)
     {
-        $categoryModel = new CategoryModel();
-        $categories = $categoryModel->findAll();
+        $categories = $this->categoryModel->findAll();
         $categoriesForSelect = [];
         foreach ($categories as $category) {
             $categoriesForSelect[$category['id']] = $category['name'];
         }
 
-        $authorModel = new AuthorModel();
-        $authors = $authorModel->findAll();
+        $authors = $this->authorModel->findAll();
         $authorsForSelect = [];
         foreach ($authors as $author) {
             $authorsForSelect[$author['id']] = $author['first_name'] . ' ' . $author['last_name'];
@@ -241,7 +256,7 @@ class BookController extends AbstractController
             ]
         )
         ->endDiv()
-        ->startDiv('col-md-4 my-3 mx-auto')
+        ->startDiv('col-md-4 my-4')
         ->addButton(isset($book) ? 'Modifier le livre' : 'Ajouter le livre', [
             'class' => 'btn btn-primary w-100',
         ])
