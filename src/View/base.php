@@ -19,10 +19,14 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/?p=book/index">Livres</a>
-                            </li>
+                            <a class="nav-link" href="/?p=book/index">
+                                <li class="nav-item">
+                                    Livres
+                                </li>
+                            </a>
                         </ul>
+                        <a href="/?p=user/login" class="ms-md-auto"><button class="btn btn-success me-2" type="button">Se connecter</button>
+                        </a>
                     </div>
                 </div>
             </nav>
