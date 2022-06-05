@@ -36,7 +36,7 @@ class AbstractModel extends Database
         $sql = 'SELECT * FROM ' . $this->table . ' ';
         $sql .= $paginate ? $pagination->paginationQuery() : '';
         $sql .= ';';
-        
+
         $query = $this->run($sql);
         return $query->fetchAll();
     }
@@ -75,7 +75,7 @@ class AbstractModel extends Database
         // On boucle pour éclater le tableau
         foreach ($this as $column => $value) {
             // INSERT INTO annonces (titre, description, actif) VALUES (?, ?, ?)
-            if ($value !== null && $column != 'db' && $column != 'table'  && $column != 'nbResourcesPerPage') {
+            if ($value !== null && $column != 'db' && $column != 'table' && $column != 'nbResourcesPerPage') {
                 $columns[] = $this->formatPropertyForDB($column);
                 $inter[] = "?";
                 $values[] = $value;
@@ -169,5 +169,16 @@ class AbstractModel extends Database
         $property = implode('_', $newStrings);
 
         return $property;
+    }
+
+    public function findRandoomResources(string $table)
+    {
+        $sql = "SELECT * FROM $table
+        ORDER BY RAND()
+        LIMIT 3;";
+
+        $query = $this->run($sql);
+
+        return $query->fetchAll();
     }
 }

@@ -32,7 +32,7 @@
                         </ul>
                         <?php if (!isset($_SESSION['user'])): ?>
                             <div class="ms-md-auto">
-                                <a href="/?p=user/register"><button class="btn btn-success me-2" type="button">S'enregister</button>
+                                <a href="/?p=user/register"><button class="btn btn-light me-2" type="button">S'enregister</button>
                                 </a>
                                 <a href="/?p=user/login"><button class="btn btn-outline-light me-2" type="button">Se connecter</button>
                                 </a>
