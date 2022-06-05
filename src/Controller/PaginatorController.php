@@ -48,11 +48,19 @@ class PaginatorController
     {
         $page = $this->getCurrentPage();
         $nbPages = $this->getNbPages();
+        $pageNotExist = $page > $nbPages;
+        
+        if ($pageNotExist) {
+            header('Location: ' . $_SERVER['REQUEST_URI']);
+            $_SESSION['errors'][] = "La page " . $page . " n'existe pas";
+            exit;
+        } else {
+            ob_start();
+            include "src/View/component/paginator.php";
+    
+            return ob_get_clean();
+        }
 
-        ob_start();
-        include "src/View/component/paginator.php";
-
-        return ob_get_clean();
     }
 
 }
