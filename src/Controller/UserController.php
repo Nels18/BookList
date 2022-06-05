@@ -159,8 +159,6 @@ class UserController extends AbstractController
                     ->setRoles(['ROLE_USER'])
                     ->setCreatedAt((new DateTime('now'))->format('Y-m-d H:i:s'));
 
-                var_dump($this->userModel);
-
                 // On stocke l'utilisateur
                 $this->userModel->create();
             } else {

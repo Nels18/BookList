@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Controller\PaginatorController;
+
 class BookModel extends AbstractModel
 {
     protected $id;
@@ -198,5 +200,35 @@ class BookModel extends AbstractModel
         $this->deletedAt = $deletedAt;
 
         return $this;
+    }
+
+
+    public function findBooksWithCategoryAndAuthor()
+    {
+        $pagination = new PaginatorController($this);
+
+        $sql = "SELECT b.id, b.title, a.first_name author_first_name, a.last_name author_last_name, c.name category, b.published_at, b.summary  FROM book b
+        INNER JOIN author a ON a.id = b.author_id
+        INNER JOIN category c ON c.id = b.category_id
+        ORDER BY id
+        ";
+        $sql .= $pagination->paginationQuery() . ';';
+        
+        $query = $this->run($sql);
+
+        return $query->fetchAll();
+    }
+
+    public function findRandoomBooks()
+    {
+        $sql = "SELECT b.id, b.title, a.first_name author_first_name, a.last_name author_last_name, c.name category, b.published_at, b.summary  FROM book b
+        INNER JOIN author a ON a.id = b.author_id
+        INNER JOIN category c ON c.id = b.category_id
+        ORDER BY RAND()
+        LIMIT 3;";
+        
+        $query = $this->run($sql);
+
+        return $query->fetchAll();
     }
 }

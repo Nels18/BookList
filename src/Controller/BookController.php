@@ -22,27 +22,14 @@ class BookController extends AbstractController
         $this->authorModel = new AuthorModel();
     }
 
+
     public function index()
     {
-        $booksModels = $this->bookModel->findAll();
-
-        $books = [];
-
-        foreach ($booksModels as $book) {
-            $books[] = [
-                'id' => $book['id'],
-                'title' => $book['title'],
-                'category' => $this->categoryModel->findOne($book['category_id']),
-                'author' => $this->authorModel->findOne($book['author_id']),
-                'published_at' => $book['published_at'],
-                'summary' => $book['summary'],
-            ];
-        };
-
+        $books = $this->bookModel->findBooksWithCategoryAndAuthor();
+        
         $pagination = new PaginatorController($this->bookModel);
 
         $this->render('book/index', compact('books') + ['pagination' => $pagination->render()]);
-
     }
 
     public function show(int $id)
