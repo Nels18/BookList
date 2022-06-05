@@ -29,12 +29,15 @@ class AbstractModel extends Database
         return $this->db->query($sql);
     }
 
-    public function findAll()
+    public function findAll(bool $paginate = true)
     {
         $pagination = new PaginatorController($this);
-        $query = $this->run(
-            'SELECT * FROM ' . $this->table . ' ' . $pagination->paginationQuery() . ';'
-        );
+
+        $sql = 'SELECT * FROM ' . $this->table . ' ';
+        $sql .= $paginate ? $pagination->paginationQuery() : '';
+        $sql .= ';';
+        
+        $query = $this->run($sql);
         return $query->fetchAll();
     }
 

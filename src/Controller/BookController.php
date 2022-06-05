@@ -164,13 +164,13 @@ class BookController extends AbstractController
 
     public function getBookForm(mixed $book = null)
     {
-        $categories = $this->categoryModel->findAll();
+        $categories = $this->categoryModel->findAll(false);
         $categoriesForSelect = [];
         foreach ($categories as $category) {
             $categoriesForSelect[$category['id']] = $category['name'];
         }
 
-        $authors = $this->authorModel->findAll();
+        $authors = $this->authorModel->findAll(false);
         $authorsForSelect = [];
         foreach ($authors as $author) {
             $authorsForSelect[$author['id']] = $author['first_name'] . ' ' . $author['last_name'];
