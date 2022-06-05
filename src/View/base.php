@@ -26,8 +26,12 @@
                             </a>
                         </ul>
                         <?php if (!isset($_SESSION['user'])): ?>
-                            <a href="/?p=user/login" class="ms-md-auto"><button class="btn btn-success me-2" type="button">Se connecter</button>
-                            </a>
+                            <div class="ms-md-auto">
+                                <a href="/?p=user/register"><button class="btn btn-success me-2" type="button">S'enregister</button>
+                                </a>
+                                <a href="/?p=user/login"><button class="btn btn-outline-light me-2" type="button">Se connecter</button>
+                                </a>
+                            </div>
                         <?php endif;?>
                         <?php if (!empty($_SESSION['user'])): ?>
                             <a href="/?p=user/logout" class="ms-md-auto"><button class="btn btn-danger me-2" type="button">Se déconnecter</button>
@@ -37,7 +41,7 @@
                 </div>
             </nav>
         </header>
-        <main class="container-xxl px-md-5 px-3 pt-5 min-vh-100">
+        <main class="container-xxl px-md-5 p-5 min-vh-100">
             <div class="container-xxl px-md-5 px-3 min-vh-100">
                 <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
                 <?php if (!empty($_SESSION['messages'])): ?>

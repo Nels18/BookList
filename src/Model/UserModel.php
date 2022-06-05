@@ -9,6 +9,8 @@ class UserModel extends AbstractModel
     protected $id;
     protected $email;
     protected $password;
+    protected $firstName;
+    protected $lastName;
     protected $roles;
     protected $createdAt;
     protected $updatedAt;
@@ -104,15 +106,55 @@ class UserModel extends AbstractModel
     }
 
     /**
+     * Get the value of firstName
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set the value of firstName
+     *
+     * @return  self
+     */
+    public function setFirstName($firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of lastName
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set the value of lastName
+     *
+     * @return  self
+     */
+    public function setLastName($lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
      * Get the value of roles
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        // $roles[] = 'ROLE_USER';
 
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return array_unique([$roles]);
     }
 
     /**
@@ -120,9 +162,9 @@ class UserModel extends AbstractModel
      *
      * @return  self
      */
-    public function setRoles($roles): self
+    public function setRoles(array $roles): self
     {
-        $this->roles = json_decode($roles);
+        $this->roles = json_encode($roles);
 
         return $this;
     }
