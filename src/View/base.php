@@ -24,6 +24,11 @@
                                     Livres
                                 </li>
                             </a>
+                            <a class="nav-link" href="/?p=author/index">
+                                <li class="nav-item">
+                                    Auteurs
+                                </li>
+                            </a>
                         </ul>
                         <?php if (!isset($_SESSION['user'])): ?>
                             <div class="ms-md-auto">

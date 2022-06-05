@@ -145,7 +145,7 @@ class BookController extends AbstractController
     {
         $book = $this->bookModel->findOne($id);
         $this->bookModel->delete($id);
-        $_SESSION['messages'][] = 'Le livre <span class="fw-bold">' . $book['title'] . '</span> a bien été modifié';
+        $_SESSION['messages'][] = 'Le livre <span class="fw-bold">' . $book['title'] . '</span> a bien été supprimé';
         header('Location: ?p=book/index');
     }
 

@@ -75,7 +75,7 @@ class AbstractModel extends Database
         // On boucle pour éclater le tableau
         foreach ($this as $column => $value) {
             // INSERT INTO annonces (titre, description, actif) VALUES (?, ?, ?)
-            if ($value !== null && $column != 'db' && $column != 'table') {
+            if ($value !== null && $column != 'db' && $column != 'table'  && $column != 'nbResourcesPerPage') {
                 $columns[] = $this->formatPropertyForDB($column);
                 $inter[] = "?";
                 $values[] = $value;
