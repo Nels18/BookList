@@ -3,11 +3,15 @@
 namespace App\Model;
 
 use App\Chore\Database\Database;
+use App\Controller\PaginatorController;
 
 class AbstractModel extends Database
 {
     // Table de la base de données
-    public $table;
+    protected $table;
+
+    // Nombre de ressource par page
+    public $nbResourcesPerPage;
 
     // Instance de Database
     private $db;
@@ -27,7 +31,10 @@ class AbstractModel extends Database
 
     public function findAll()
     {
-        $query = $this->run('SELECT * FROM ' . $this->table);
+        $pagination = new PaginatorController($this);
+        $query = $this->run(
+            'SELECT * FROM ' . $this->table . ' ' . $pagination->paginationQuery() . ';'
+        );
         return $query->fetchAll();
     }
 
@@ -107,6 +114,11 @@ class AbstractModel extends Database
     public function delete(int $id)
     {
         return $this->run('DELETE FROM ' . $this->table . ' WHERE id = ?', [$id]);
+    }
+
+    public function getNbResource()
+    {
+        return $this->run('SELECT COUNT(*) as total FROM ' . $this->table)->fetch();
     }
 
     public function hydrate($data)

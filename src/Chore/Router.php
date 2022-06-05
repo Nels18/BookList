@@ -39,12 +39,18 @@ class Router
             $params = explode('/', $_GET['p']);
         }
 
+        // Si dans l'uri on a déja une page on la supprime
+        if (isset($_GET['page'])) {
+            $newUri = preg_replace('/(&page=[0-9])/', '', $_SERVER['REQUEST_URI']);
+            $_SERVER['REQUEST_URI'] = $newUri;
+        }
+
         if (isset($params[0]) && $params[0] != '') {
             // On a au moins 1 paramètre
             // On récupère le nom du contrôleur à instancier
             // On met une majuscule en 1ère lettre, on ajoute le namespace complet avant et on ajoute "Controller" après
             $controller = 'App\\Controller\\' . ucfirst(array_shift($params)) . 'Controller';
-            
+
             // On instancie le contrôleur
             $controller = new $controller();
 

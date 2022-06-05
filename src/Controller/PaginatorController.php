@@ -2,32 +2,23 @@
 
 namespace App\Controller;
 
-use App\Chore\Database\Database;
+use App\Model\AbstractModel;
 
 class PaginatorController
 {
-    private $resource;
-        
-    private const NB_RESOURCES_PER_PAGE = 3;
+    private $nbResource;
+    private $nbResourcesPerPage;
+    // private $nbPages = $this->getNbPages($this->nbResourcesPerPage);
 
-    public function __construct(string $resource)
+    public function __construct(AbstractModel $resourceModel)
     {
-        $this->resource = $resource;
+        $this->nbResourcesPerPage = $resourceModel->nbResourcesPerPage;
+        $this->nbResource = $resourceModel->getNbResource();
     }
 
-    public function getResourceCount()
+    public function getNbPages(): int | float
     {
-        $resource = $this->resource;
-        $sql = 'SELECT COUNT(*) as total FROM ' . $resource;
-
-        return Database::getInstance()->query($sql);
-    }
-
-    public function getPagesCount(): int
-    {
-        $nbResource = $this->getResourceCount();
-
-        return ceil($nbResource[0]['total'] / self::NB_RESOURCES_PER_PAGE);
+        return ceil(intval($this->nbResource['total']) / $this->nbResourcesPerPage);
     }
 
     public function getCurrentPage(): int
@@ -40,27 +31,27 @@ class PaginatorController
         return $page;
     }
 
-    public function getOffsetPaginationQuerry(): int
+    public function getOffsetPaginationQuery(): int
     {
-        $offset = ($this->getCurrentPage() - 1) * self::NB_RESOURCES_PER_PAGE;
+        $offset = ($this->getCurrentPage() - 1) * $this->nbResourcesPerPage;
         return $offset;
     }
 
-    public function renderQuery()
+    public function paginationQuery()
     {
-        $offset = $this->getOffsetPaginationQuerry();
-        $paginationQuery = "LIMIT " . $offset . ',' . self::NB_RESOURCES_PER_PAGE;
+        $offset = $this->getOffsetPaginationQuery();
+        $paginationQuery = "LIMIT " . $offset . ',' . $this->nbResourcesPerPage;
         return $paginationQuery;
     }
 
     public function render()
     {
         $page = $this->getCurrentPage();
-        $nbPages = $this->getPagesCount(self::NB_RESOURCES_PER_PAGE);
+        $nbPages = $this->getNbPages();
 
         ob_start();
         include "src/View/component/paginator.php";
-        
+
         return ob_get_clean();
     }
 

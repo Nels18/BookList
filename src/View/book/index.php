@@ -8,6 +8,7 @@
     </div>
 </div>
 <?php endforeach; ?>
+<?= $pagination?>
 <a href="?p=book/add"><button class="btn btn-primary">Ajouter un livre</button></a href="form_book.php">
 <!-- <?php else: ?> -->
 <!-- <p>Aucun résultat trouvé</p> -->

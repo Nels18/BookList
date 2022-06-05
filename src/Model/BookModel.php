@@ -17,6 +17,7 @@ class BookModel extends AbstractModel
     public function __construct()
     {
         $this->table = "book";
+        $this->nbResourcesPerPage = 4;
     }
 
     /**
