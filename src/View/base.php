@@ -10,7 +10,7 @@
         <title>BookList</title>
     </head>
     <body class="text-dark bg-light">
-        <header>
+        <!-- <header>
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
                 <div class="container-xxl">
                     <a href="/" class="navbar-brand px-md-5 px-3">Accueil</a>
@@ -29,6 +29,11 @@
                                     Auteurs
                                 </li>
                             </a>
+                            <a class="nav-link" href="/?p=category/index">
+                                <li class="nav-item">
+                                    Genres
+                                </li>
+                            </a>
                         </ul>
                         <?php if (!isset($_SESSION['user'])): ?>
                             <div class="ms-md-auto">
@@ -45,7 +50,7 @@
                     </div>
                 </div>
             </nav>
-        </header>
+        </header> -->
         <main class="container-xxl px-md-5 p-5 min-vh-100">
             <div class="container-xxl px-md-5 px-3 min-vh-100">
                 <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>

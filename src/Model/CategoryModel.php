@@ -9,10 +9,11 @@ class CategoryModel extends AbstractModel
     protected $createdAt;
     protected $updatedAt;
     protected $deletedAt;
-    
+
     public function __construct()
     {
         $this->table = "category";
+        $this->nbResourcesPerPage = 4;
     }
 
     /**
@@ -21,6 +22,18 @@ class CategoryModel extends AbstractModel
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * Set the value of authorId
+     *
+     * @return  self
+     */
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
