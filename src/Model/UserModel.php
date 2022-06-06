@@ -40,8 +40,10 @@ class UserModel extends AbstractModel
     {
         $_SESSION['user'] = [
             'id' => $this->id,
+            'first_name' => $this->firstName,
+            'last_name' => $this->lastName,
             'email' => $this->email,
-            'roles' => $this->roles
+            'roles' => $this->roles,
         ];
     }
 
@@ -162,7 +164,7 @@ class UserModel extends AbstractModel
      *
      * @return  self
      */
-    public function setRoles(array $roles): self
+    public function setRoles(string $roles): self
     {
         $this->roles = json_encode($roles);
 

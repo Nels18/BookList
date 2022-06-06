@@ -1,5 +1,5 @@
 <h2 class="my-4">Accueil</h2>
-<h3 class="my-4">Livres</h3>
+<h3 class="my-4 pt-3 border-top">Livres</h3>
 
 <div class="row h-50">
     <?php foreach ($books as $book): ?>
@@ -14,7 +14,7 @@
 
 <a href="/?p=book/index"><p class="card-title my-3">Tous les livres</p></a>
 
-<h3 class="my-4">Auteurs</h3>
+<h3 class="my-4 pt-3 border-top">Auteurs</h3>
 
 <div class="row h-50">
     <?php foreach ($authors as $author): ?>
@@ -28,7 +28,7 @@
 
 <a href="/?p=author/index"><p class="card-title my-3">Tous les auteurs</p></a>
 
-<h3 class="my-4">Genres</h3>
+<h3 class="my-4 pt-3 border-top">Genres</h3>
 
 <div class="row h-50">
     <?php foreach ($categories as $category): ?>
