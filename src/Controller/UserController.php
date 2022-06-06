@@ -16,19 +16,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * Crée la session de l'utilisateur
-     * @return void
-     */
-    public function setSession()
-    {
-        $_SESSION['user'] = [
-            'id' => $this->id,
-            'email' => $this->email,
-            'roles' => $this->roles,
-        ];
-    }
-
-    /**
      * Connexion des utilisateurs
      * @return void
      */
@@ -144,6 +131,7 @@ class UserController extends AbstractController
                 if ($userFromDB) {
                     // On envoie un message de session
                     $_SESSION['errors'][] = 'Cet email est déjà attribuée à un autre utilisateur. Si cet email vous appartient veuillé vous connecter';
+
                     header('Location: /?p=user/register');
                     exit;
                 }
@@ -156,11 +144,14 @@ class UserController extends AbstractController
                     ->setLastName($cleanData['user-last_name'])
                     ->setEmail($cleanData['user-email'])
                     ->setPassword($password)
-                    ->setRoles(['ROLE_USER'])
+                    ->setRoles("['ROLE_USER']")
                     ->setCreatedAt((new DateTime('now'))->format('Y-m-d H:i:s'));
 
                 // On stocke l'utilisateur
                 $this->userModel->create();
+                $_SESSION['messages'][] = 'Vous êtes inscrit, veuillez-vous connecter';
+                header('Location: /?p=user/login');
+                exit;
             } else {
 
                 // Le formulaire est invalide
@@ -239,6 +230,7 @@ class UserController extends AbstractController
     {
         // On suprime l'utilisateur de la session
         unset($_SESSION['user']);
+
         // On redirige vers la page actuelle
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit;
