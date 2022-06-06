@@ -10,7 +10,7 @@
         <title>BookList</title>
     </head>
     <body class="text-dark bg-light">
-        <!-- <header>
+        <header>
             <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
                 <div class="container-xxl">
                     <a href="/" class="navbar-brand px-md-5 px-3">Accueil</a>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </nav>
-        </header> -->
+        </header>
         <main class="container-xxl px-md-5 p-5 min-vh-100">
             <div class="container-xxl px-md-5 px-3 min-vh-100">
                 <h1 class="display-1 text-center m-5 fw-bold">Booklist</h1>
@@ -62,6 +62,7 @@
                     <?php endforeach;?>
                     <?php unset($_SESSION['messages']);?>
                 <?php endif;?>
+
 
                 <?php if (!empty($_SESSION['errors'])): ?>
                     <div class="card p-5 my-3">
