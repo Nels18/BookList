@@ -22,11 +22,10 @@ class AuthorController extends AbstractController
         $this->authorModel = new AuthorModel();
     }
 
-
     public function index()
     {
         $authors = $this->authorModel->findAll();
-        
+
         $pagination = new PaginatorController($this->authorModel);
 
         $this->render('author/index', compact('authors') + ['pagination' => $pagination->render()]);
@@ -34,7 +33,7 @@ class AuthorController extends AbstractController
 
     public function show(int $id)
     {
-        // On va chercher 1 livre
+        // On va chercher 1 auteur
         $author = $this->authorModel->findOne($id);
 
         // On envoie à la vue
@@ -57,7 +56,6 @@ class AuthorController extends AbstractController
                 $data = $this->authorModel->setFirstName($cleanData['author-first-name'])
                     ->setLastName($cleanData['author-last-name'])
                     ->setCreatedAt((new DateTime('now'))->format('Y-m-d H:i:s'));
-                    var_dump($this->authorModel);
 
                 $author = $this->authorModel->hydrate($data);
                 $author->create();
@@ -82,9 +80,9 @@ class AuthorController extends AbstractController
 
     public function edit(int $id)
     {
-        // On va vérifier si l\'auteur existe dans la base
+        // On va vérifier si l'auteur existe dans la base
 
-        // On cherche l\'auteur avec l'id $id
+        // On cherche l'auteur avec l'id $id
         $author = $this->authorModel->findOne($id);
 
         if (!empty($_POST)) {
@@ -98,14 +96,21 @@ class AuthorController extends AbstractController
                 // On se protège dees injections XXS
                 $cleanData = $this->cleanDataFromUser($_POST);
 
-                $data = $this->authorModel->setFirstName($cleanData['author-first-name'])
-                ->setLastName($cleanData['author-last-name'])
+                $updatedAuthor = $this->authorModel->setId($author['id'])
+                    ->setFirstName($cleanData['author-first-name'])
+                    ->setLastName($cleanData['author-last-name'])
                     ->setUpdatedAt((new DateTime('now'))->format('Y-m-d H:i:s'));
 
-                $updatedAuthor = $this->authorModel->hydrate($data);
-                $originalAuthor = $this->authorModel->hydrate($author);
+                $updatedData = [
+                    $updatedAuthor->getFirstName(),
+                    $updatedAuthor->getLastName(),
+                ];
+                $originalData = [
+                    $author['first_name'],
+                    $author['last_name'],
+                ];
 
-                if ($originalAuthor !== $updatedAuthor) {
+                if ($updatedData !== $originalData) {
                     $updatedAuthor->update();
 
                     $_SESSION['messages'][] = 'L\'auteur a bien été modifié';
@@ -139,7 +144,6 @@ class AuthorController extends AbstractController
 
     public function getAuthorForm(mixed $author = null)
     {
-        var_dump($author);
         $form = new Form();
         $form->startForm()
             ->startDiv('row')

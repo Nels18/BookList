@@ -2,7 +2,7 @@
 <?php foreach ($authors as $author): ?>
 <div class="card p-3 my-5 w-50 mx-auto">
     <div class="card-body">
-        <a href="?p=author/show/<?= $author['id'] ?>"><h3 class="card-title fw-bold"><?= $author['last_name'] . ' ' . $author['first_name'] ?></h3></a>
+        <a href="?p=author/show/<?= $author['id'] ?>"><h3 class="card-title fw-bold"><?= $author['first_name'] . ' ' . $author['last_name'] ?></h3></a>
     </div>
 </div>
 <?php endforeach; ?>

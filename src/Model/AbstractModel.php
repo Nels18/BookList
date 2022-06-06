@@ -98,17 +98,17 @@ class AbstractModel extends Database
         // On boucle pour éclater le tableau
         foreach ($this as $column => $value) {
             // UPDATE annonces SET titre = ?, author_id = ?, summary = ? WHERE id= ?
-            if ($value !== null && $column != 'db' && $column != 'table') {
+            if ($value !== null && $column != 'db' && $column != 'table' && $column != 'nbResourcesPerPage') {
                 $columns[] = $this->formatPropertyForDB($column) . " = ?";
                 $values[] = $value;
             }
         }
         // On ajoute la valeur de l'id pour le 'WHERE'
         $values[] = $this->id;
-
+        
         // On transforme le tableau "columns" en une chaine de caractères
         $list_columns = implode(', ', $columns);
-
+        
         // On exécute la requête
         // ('UPDATE ' . $this->table . ' SET ' . $list_columns . ' WHERE id = ?', $values)
         return $this->run('UPDATE ' . $this->table . ' SET ' . $list_columns . ' WHERE id = ?', $values);
@@ -137,6 +137,7 @@ class AbstractModel extends Database
                 }
             }
         }
+
         return $this;
     }
 

@@ -10,7 +10,7 @@ class AuthorModel extends AbstractModel
     protected $createdAt;
     protected $updatedAt;
     protected $deletedAt;
-    
+
     public function __construct()
     {
         $this->table = "author";
@@ -23,6 +23,18 @@ class AuthorModel extends AbstractModel
     public function getId(): int
     {
         return $this->id;
+    }
+    
+    /**
+     * Set the value of authorId
+     *
+     * @return  self
+     */
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -44,7 +56,6 @@ class AuthorModel extends AbstractModel
 
         return $this;
     }
-
 
     /**
      * Get the value of lastName

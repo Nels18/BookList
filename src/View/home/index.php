@@ -27,3 +27,17 @@
 </div>
 
 <a href="/?p=author/index"><p class="card-title my-3">Tous les auteurs</p></a>
+
+<h3 class="my-4">Genres</h3>
+
+<div class="row h-50">
+    <?php foreach ($categories as $category): ?>
+    <div class="card col-md mx-3 p-3 container-overflow">
+        <div class="card-body d-flex flex-column">
+            <h4 class="card-title fw-bold"><?=$category['name']?></h4>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+
+<a href="/?p=category/index"><p class="card-title my-3">Tous les genres</p></a>
