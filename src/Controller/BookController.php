@@ -106,7 +106,7 @@ class BookController extends AbstractController
                 // On se protège dees injections XXS
                 $cleanData = $this->cleanDataFromUser($_POST);
 
-                $data = $this->bookModel->setTitle($cleanData['book-title'])
+                $updatedBook = $this->bookModel->setTitle($cleanData['book-title'])
                     ->setId($book['id'])
                     ->setAuthorId($cleanData['book-author'])
                     ->setCategoryId($cleanData['book-category'])
@@ -114,10 +114,21 @@ class BookController extends AbstractController
                     ->setPublishedAt($cleanData['book-published_at'])
                     ->setSummary($cleanData['book-summary']);
 
-                $updatedBook = $this->bookModel->hydrate($data);
-                $originalBook = $this->bookModel->hydrate($book);
+                $updatedData = [
+                    $updatedBook->getTitle(),
+                    $updatedBook->getAuthorId(),
+                    $updatedBook->getCategoryId(),
+                    $updatedBook->getSummary(),
+                ];
 
-                if ($originalBook !== $updatedBook) {
+                $originalData = [
+                    $book['title'],
+                    intval($book['author_id']),
+                    intval($book['category_id']),
+                    $book['summary'],
+                ];
+
+                if ($originalData !== $updatedData) {
                     $updatedBook->update();
 
                     $_SESSION['messages'][] = 'Le livre a bien été modifié';
