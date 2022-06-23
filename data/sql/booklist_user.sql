@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `booklist` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `booklist`;
 -- MySQL dump 10.13  Distrib 8.0.26, for macos11 (x86_64)
 --
 -- Host: localhost    Database: booklist
@@ -18,31 +16,34 @@ USE `booklist`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `author`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `author`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `author` (
+CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(100) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
+  `roles` json NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `author`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `author` WRITE;
-/*!40000 ALTER TABLE `author` DISABLE KEYS */;
-INSERT INTO `author` VALUES (1,NULL,'Confucius','2022-06-02 06:25:24',NULL,NULL),(2,'Gérard','Rolleri','2022-06-02 06:25:24',NULL,NULL),(3,'Pierre','Lemaitre','2022-06-02 06:25:24',NULL,NULL),(4,'Sebastian','Fitzek','2022-06-02 06:25:24',NULL,NULL);
-/*!40000 ALTER TABLE `author` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (0,'admin@admin.fr','$argon2i$v=19$m=65536,t=4,p=1$OFNYcnVPcDZDenJjMjg3RQ$qGhYt52bJa84G4ZCCjB21qhFob7rklbZPiA7qzMTc9k','','','[\"ROLE_USER\"]','2022-06-04 07:47:08',NULL,NULL);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-02 15:48:33
+-- Dump completed on 2022-06-04 14:20:24
