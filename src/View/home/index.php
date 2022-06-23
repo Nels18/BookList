@@ -4,7 +4,7 @@
 <div class="row h-50">
     <?php foreach ($books as $book): ?>
     <div class="col-md">
-        <a href="#" class="bg-danger">
+        <a href="?p=book/show/<?= $book['id'] ?>" class="bg-danger">
             <div class="card p-3 h-100">
                 <div class="card-body d-flex flex-column">
                 <h4 class="card-title fw-bold"><?=$book['title'] . ' - ' . $book['author_first_name'] . ' ' . $book['author_last_name']?></h4>
@@ -22,7 +22,7 @@
 <div class="row h-50">
     <?php foreach ($authors as $author): ?>
     <div class="col-md">
-        <a href="#" class="bg-danger">
+        <a href="?p=author/show/<?= $author['id'] ?>" class="bg-danger">
             <div class="card p-3 h-100">
                 <div class="card-body d-flex flex-column">
                 <h4 class="card-title fw-bold"><?=$author['first_name'] . ' ' . $author['last_name']?></h4>
@@ -40,7 +40,7 @@
 <div class="row h-50">
     <?php foreach ($categories as $category): ?>
     <div class="col-md">
-        <a href="#" class="bg-danger">
+        <a href="?p=category/show/<?= $category['id'] ?>" class="bg-danger">
             <div class="card p-3 h-100">
                 <div class="card-body d-flex flex-column">
                     <h4 class="card-title fw-bold"><?=$category['name']?></h4>
